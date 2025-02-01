@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Weather App</title>
+    <!-- Link to CSS file -->
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <!-- Optional: Add a favicon -->
+    <link rel="icon" href="{% static 'images/favicon.ico' %}">
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header>
+            <h1 class="app-title">Weather App</h1>
+        </header>
+
+        <!-- Form Section -->
+        <form method="POST" class="search-form">
+            {% csrf_token %}
+            <input 
+                type="text" 
+                name="city" 
+                placeholder="Enter city" 
+                required 
+                class="input-city"
+            >
+            <button type="submit" class="btn-search">Search</button>
+        </form>
+
+        <!-- Weather Display Section -->
+        <div class="weather">
+            <!-- Left Section: Temperature and City -->
+            <div class="left">
+                <h2 class="temperature">{{ temp }}&#176; C</h2>
+                <h3 class="city">{{ city }}</h3>
+            </div>
+
+            <!-- Right Section: Icon and Conditions -->
+            <div class="right">
+                <div class="icon">
+                    <img 
+                        src="http://openweathermap.org/img/w/{{ icon }}.png" 
+                        alt="Weather Icon" 
+                        width="100px"
+                    >
+                </div>
+                <div class="condition">
+                    <p class="description">{{ description }}</p>
+                    <p class="day">{{ day }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
